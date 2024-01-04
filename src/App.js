@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
 import './App.css';
+import Contents from './components/Contents/Contents';
+import Intro from './components/Intro/Intro';
+import Menus from './components/Menus/Menus';
+import MoviesDetail from './components/MoviesDetail/MoviesDetail';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Pages/Home';
+import SearchMovies from './components/SearchMovies/SearchMovies';
+
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Search from './components/Pages/Search';
 
 function App() {
+const { MovieDetail} = useSelector(state => state.infoMovies)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>  
+          <Navbar />
+          <Routes>
+            <Route exact path='/' element={<Home/>}/>
+            <Route path='search' element={<Search/>}/>
+
+          </Routes>
+      </BrowserRouter>
+      {/* <Intro />
+      <Contents /> 
+      <Menus />
+      <MoviesDetail movie={MovieDetail} showModal={MovieDetail ? true : false}/> */}
+      {/* <SearchMovies /> */}
+      <Home />
     </div>
   );
 }
